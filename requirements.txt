@@ -6,5 +6,3 @@ langchain
 langchain-google-genai
 supabase
 requests
-typing
-re
