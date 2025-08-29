@@ -240,7 +240,7 @@ temp_storage = {}
 def submit_question(req: QuestionRequest):
     question = req.question
     temp_storage["latest_question"] = question
-    return {temp_storage["latest_question"]}
+    return {"question":temp_storage["latest_question"]}
 
 @app.get("/get-answer")
 def get_answer():
@@ -254,15 +254,15 @@ def get_answer():
     if any(word in q_lower for word in control_words):
         ai_answer = agent.run(question)
         temp_storage["latest_answer"] = ai_answer
-        return {ai_answer}
+        return {"answer":ai_answer}
 
     db_result = check_keywords_and_fetch(question)
     if db_result is not None:
-        return {db_result}
+        return {"answer":db_result}
 
     ai_answer = agent.run(question)
     temp_storage["latest_answer"] = ai_answer
-    return {ai_answer}
+    return {"answer":ai_answer}
 
 @app.get("/")
 def root():
@@ -270,6 +270,7 @@ def root():
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
+
 
 
 
