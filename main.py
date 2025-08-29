@@ -200,7 +200,7 @@ def check_keywords_and_fetch(question: str):
     for keyword, endpoint in KEYWORD_TABLE_MAP.items():
         if re.search(rf"\b{keyword}\b", q_lower):
             try:
-                url = f"http://127.0.0.1:8000{endpoint}"
+                url = f"https://api-drki.onrender.com{endpoint}"
                 response = requests.get(url)
                 if response.status_code == 200:
                     data = response.json()
@@ -259,3 +259,4 @@ def root():
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
