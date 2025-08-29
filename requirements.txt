@@ -6,3 +6,5 @@ langchain
 langchain-google-genai
 supabase
 requests
+typing
+python-dotenv
